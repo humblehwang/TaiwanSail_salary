@@ -1,0 +1,92 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Kodinger">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Taiwan Sail Association </title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+</head>
+
+<body class="my-login-page">
+
+
+			<div class="d-flex justify-content-center">
+				<div class="card-wrapper">
+					<div class="brand">
+						<img src="static/img/logo.jpg" width="200" height="150" alt="logo">
+					</div>
+					<div class="card fat">
+						<div class="card-body">
+							<h4 class="card-title">請輸入您的身分證字號(英文請大寫)</h4>
+							<form method="POST" class="my-login-validation" novalidate="">
+								<div class="form-group">
+									<label for="ID">身分證</label>
+									<input id="ID" type="ID" class="form-control" name="ID" value="" required autofocus>
+								</div>
+								<div class="form-group m-0">
+									<button id="submit" type="submit" class="btn btn-primary btn-block">
+										Submit
+									</button>
+                               </div>
+							</form>
+                            
+						</div>
+					</div>
+				</div>
+
+			</div>
+   
+<div  class="p-2" id="data_content">    
+<script>
+    
+
+    
+    
+    
+var SubmitBtn = document.getElementById("submit");
+var ID = document.getElementById("ID");
+
+SubmitBtn.addEventListener("click",function(e){
+    e.preventDefault();
+    data = {"ID":ID.value};
+    console.log(data);
+    
+    $.ajax({ 
+    url: "getsalary", 
+    type: "POST", 
+    dataType: "json",
+    data: JSON.stringify(data),
+    contentType: 'application/json;charset=UTF-8',
+    success: function(response){
+        console.log(JSON.stringify(data));
+        $("#data_content").html(response.responseText);
+    }, error: function(xhr) {
+        console.log(xhr);
+        console.log(JSON.stringify(data));
+    } 
+    });
+    
+    
+    
+    
+      
+});   
+   
+</script>
+    
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+
+    
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+

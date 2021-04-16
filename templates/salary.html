@@ -1,0 +1,89 @@
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+
+
+
+{% if flag == 1 %}
+<script>
+	alert("輸入不存在身分證");
+</script>
+{% endif %}
+
+
+{% if flag == 0 %}
+
+
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">月份</th>
+      <th scope="col">姓名</th>
+      <th scope="col">身分證</th>
+      <th scope="col">勞保天數</th>
+      <th scope="col">品格</th>
+      <th scope="col">課輔</th>
+      <th scope="col">風愛</th>
+      <th scope="col">外勤</th>
+      <th scope="col">一粒麥子</th>
+      <th scope="col">總和</th>
+      <th scope="col">實際薪水(扣掉勞保)</th>
+    </tr>
+  </thead>   
+
+  <tbody>
+      {% for data in data_list %}
+    <tr>
+      <td>{{data[0]}}</td>
+      <td>{{data[1]}}</td>
+      <td>{{data[2]}}</td>
+      <td>{{data[3]}}</td>
+      <td>{{data[4]}}</td>
+      <td>{{data[5]}}</td>
+      <td>{{data[6]}}</td>
+      <td>{{data[7]}}</td>
+      <td>{{data[8]}}</td>
+      <td>{{data[9]}}</td>
+      <td>{{data[10]}}</td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+
+
+<div style="width: 200px; height: 200px">
+    <canvas id="canvasPie"></canvas>
+</div>
+
+
+<script type="text/javascript">
+
+//資料標題
+            var labels= [{{data_list[0][0]}}+'月',{{data_list[1][0]}}+'月',{{data_list[2][0]}}+'月'];
+
+            var ctx = document.getElementById('canvasPie').getContext('2d');
+            var pieChart = new Chart(ctx, {
+              type: 'pie',
+              data : {
+                labels:labels,
+                datasets: [{
+                    //預設資料
+                    data:[{{data_list[0][9]}},{{data_list[1][9]}},{{data_list[2][9]}}],
+                    backgroundColor: [
+                    //資料顏色
+                                "#00A1FF",
+                                "#FF0004",
+                                "#008000",
+                                "#FFFF00",
+                                "#550088"
+                    ],
+                }],
+              }
+            });    
+    
+
+</script>
+
+
+
+{% endif %}
